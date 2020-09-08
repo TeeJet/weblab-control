@@ -6,7 +6,7 @@ use Exception;
 
 class Device implements DeviceInterface
 {
-    /** @var CommandInterface */
+    /** @var string $state method */
     public $state;
 
     protected $class;
@@ -33,8 +33,7 @@ class Device implements DeviceInterface
      */
     public function actionOn(): CommandInterface
     {
-        $command = new Command($this);
-        $command->method = $this->methodOn;
+        $command = new Command($this, $this->methodOn);
         return $this->executeCommand($command);
     }
 
@@ -44,8 +43,7 @@ class Device implements DeviceInterface
      */
     public function actionOff(): CommandInterface
     {
-        $command = new Command($this);
-        $command->method = $this->methodOff;
+        $command = new Command($this, $this->methodOff);
         return $this->executeCommand($command);
     }
 
@@ -59,7 +57,6 @@ class Device implements DeviceInterface
         $this->checkCommandIsDifferent($command);
         $command->backup();
         $command->execute();
-        $this->state = $command;
         return $command;
     }
 
@@ -72,7 +69,7 @@ class Device implements DeviceInterface
         if (empty($this->state)) {
             return;
         }
-        if ($this->state->getMethod() == $command->getMethod() && $this->state->getDeviceName() == $command->getDeviceName()) {
+        if ($this->state == $command->getMethod() && $this->getName() == $command->getDeviceName()) {
             throw new Exception("Attempt to change a state, that is already active");
         }
     }

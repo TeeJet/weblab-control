@@ -9,12 +9,19 @@ class Command implements CommandInterface
     public $method;
     public $device;
 
-    /** @var Command */
+    /** @var string $previous action */
     public $previous;
 
-    public function __construct(Device &$device)
+    public function __construct(Device &$device, $method)
     {
         $this->device = $device;
+        $this->method = $method;
+    }
+
+    public function execute()
+    {
+        call_user_func([$this->device->baseObject, $this->method]);
+        $this->device->state = $this->method;
     }
 
     public function backup()
@@ -27,13 +34,13 @@ class Command implements CommandInterface
      */
     public function undo()
     {
-        $this->previous->execute();
+        if (empty($this->previous)) {
+            throw new Exception("Can't undo to init state, because it is unknown");
+        }
+        $command = new Command($this->device, $this->method);
+        $command->method = $this->previous;
+        $command->execute();
         $this->device->state = $this->previous;
-    }
-
-    public function execute()
-    {
-        call_user_func([$this->device->baseObject, $this->method]);
     }
 
     public function getMethod()
