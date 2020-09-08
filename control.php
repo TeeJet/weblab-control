@@ -29,11 +29,11 @@ try {
             break;
         default:
             echo "Available commands: " . PHP_EOL;
-            echo str_pad("list", 30) . "shows list of device names" . PHP_EOL;
-            echo str_pad("add <position> <device>", 30) . "binds a button on the control" . PHP_EOL;
-            echo str_pad("state", 30) . "shows current statement of the control " . PHP_EOL;
-            echo str_pad("press <position> <on|off>", 30) . "performs an action of a binded button" . PHP_EOL;
-            echo str_pad("undo", 30) .  "cancels last action";
+            echo str_pad("list", 30) . "displays a list of device names" . PHP_EOL;
+            echo str_pad("state", 30) . "displays current statement of the control" . PHP_EOL;
+            echo str_pad("add <position> <device>", 30) . "binds a button to the device" . PHP_EOL;
+            echo str_pad("press <position> <on|off>", 30) . "performs an action on the button" . PHP_EOL;
+            echo str_pad("undo", 30) .  "cancels the last action";
             break;
     }
 } catch (Exception $e) {
