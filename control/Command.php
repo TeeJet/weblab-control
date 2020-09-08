@@ -9,7 +9,7 @@ class Command implements CommandInterface
     public $method;
     public $device;
 
-    /** @var string $previous action */
+    /** @var string $previous method */
     public $previous;
 
     public function __construct(Device &$device, $method)
@@ -37,8 +37,7 @@ class Command implements CommandInterface
         if (empty($this->previous)) {
             throw new Exception("Can't undo to init state, because it is unknown");
         }
-        $command = new Command($this->device, $this->method);
-        $command->method = $this->previous;
+        $command = new Command($this->device, $this->previous);
         $command->execute();
         $this->device->state = $this->previous;
     }
