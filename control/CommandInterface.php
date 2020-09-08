@@ -8,7 +8,7 @@ interface CommandInterface
 
     public function undo();
 
-    public function getMethod();
+    public function getState();
 
     public function getDeviceName();
 }

@@ -43,7 +43,7 @@ class Command implements CommandInterface
         $this->device->state = $this->previous;
     }
 
-    public function getMethod()
+    public function getState()
     {
         return $this->method;
     }

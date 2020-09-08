@@ -8,10 +8,9 @@ class Device implements DeviceInterface
 {
     /** @var string $state method */
     public $state;
-
-    protected $class;
     public $baseObject;
 
+    protected $class;
     protected $name;
     protected $methodOn;
     protected $methodOff;
@@ -69,7 +68,7 @@ class Device implements DeviceInterface
         if (empty($this->state)) {
             return;
         }
-        if ($this->state == $command->getMethod() && $this->getName() == $command->getDeviceName()) {
+        if ($this->state == $command->getState() && $this->getName() == $command->getDeviceName()) {
             throw new Exception("Attempt to change a state, that is already active");
         }
     }
