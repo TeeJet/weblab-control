@@ -10,3 +10,28 @@ state                       displays current statement of the control
 add <position> <device>     binds a button to the device
 press <position> <on|off>   performs an action on the button
 undo                        cancels the last action
+```            
+## Examples
+Command:
+```
+php control.php list
+```
+Result:
+```
+light
+door
+garage
+heating
+jacuzzi
+jalousie
+kettle
+```
+---
+Command:
+```
+php control.php add 1 door
+```
+Result:
+```
+Position #1 has been binded
+```
