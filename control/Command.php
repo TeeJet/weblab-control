@@ -21,7 +21,7 @@ class Command implements CommandInterface
     public function execute()
     {
         call_user_func([$this->device->baseObject, $this->method]);
-        $this->device->state = $this->method;
+        $this->device->state = $this->getState();
     }
 
     public function backup()

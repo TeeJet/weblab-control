@@ -8,21 +8,26 @@ use app\control\Storage;
 require_once 'autoload.php';
 
 $control = Control::getInstance(new Storage(), new History());
+
+$command = $_SERVER['argv'][1] ?? null;
 try {
-    switch ($_SERVER['argv'][1]) {
+    switch ($command) {
         case "list":
             echo implode(PHP_EOL, Map::list());
             break;
         case "add":
-            $position = $_SERVER['argv'][2];
-            $control->add($position, Map::getObject($_SERVER['argv'][3]));
+            $position = $_SERVER['argv'][2] ?? null;
+            $deviceName = $_SERVER['argv'][3] ?? null;
+            $control->add($position, Map::getObject($deviceName));
             echo "Position #{$position} has been binded";
             break;
         case "state":
             $control->printCommands();
             break;
         case "press":
-            $control->perform($_SERVER['argv'][2], $_SERVER['argv'][3]);
+            $position = $_SERVER['argv'][2] ?? null;
+            $action = $_SERVER['argv'][3] ?? null;
+            $control->perform($position, $action);
             break;
         case "undo":
             $control->undo();

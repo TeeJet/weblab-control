@@ -34,14 +34,14 @@ class Control
         $command->undo();
     }
 
-    public function perform($position, $type)
+    public function perform($position, $action)
     {
-        if ($type == "on") {
+        if ($action == "on") {
             $this->performOn($position);
-        } elseif ($type == "off") {
+        } elseif ($action == "off") {
             $this->performOff($position);
         } else {
-            throw new DomainException("Incorrect action: {$type}");
+            throw new DomainException("Incorrect action: {$action}");
         }
     }
 
