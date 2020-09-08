@@ -60,9 +60,10 @@ class Control
     public static function getInstance(StorageInterface $storage, HistoryInterface $history)
     {
         if (!isset(self::$instance)) {
-            $file = file_get_contents('state');
-            self::$instance = unserialize($file);
-            if (empty(self::$instance)) {
+            if (file_exists('state')) {
+                $file = file_get_contents('state');
+                self::$instance = unserialize($file);
+            } else {
                 self::$instance = new static();
                 self::$instance->storage = $storage;
                 self::$instance->history = $history;
