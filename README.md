@@ -6,7 +6,7 @@
 ## Commands
 ```            
 list                        displays a list of device names
-state                       displays current statement of the control
+state                       displays current state of the control
 add <position> <device>     binds a button to the device
 press <position> <on|off>   performs an action on the button
 undo                        cancels the last action
